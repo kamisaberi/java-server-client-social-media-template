@@ -12,15 +12,20 @@ public class Client {
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
 
-            Scanner scanner = new Scanner(System.in);
-            System.out.print("Enter a command: ");
-            String command = scanner.nextLine();
-            out.println(command);
+            while (true) {
+                Scanner scanner = new Scanner(System.in);
+                System.out.print("Enter a command: ");
+                String command = scanner.nextLine();
+                out.println(command);
+                String response = in.readLine();
+                System.out.println("Server response: " + response);
+                if (command.equals("exit")) {
+                    socket.close();
+                    break;
+                }
+            }
 
-            String response = in.readLine();
-            System.out.println("Server response: " + response);
 
-            socket.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
