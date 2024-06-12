@@ -44,11 +44,9 @@ public class Server {
             try {
                 in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
                 out = new PrintWriter(clientSocket.getOutputStream(), true);
-
                 // Handle client commands here
                 String command = in.readLine();
                 processCommand(command, out);
-
                 clientSocket.close();
             } catch (IOException e) {
                 e.printStackTrace();
